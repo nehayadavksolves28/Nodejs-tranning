@@ -28,3 +28,20 @@ console.log(os.arch())
 console.log(os.freemem())
 console.log(os.cpus())
 
+//Event Emmiter
+const EventEmmiter= require("node:events");
+
+const emitter = new EventEmmiter();
+emitter.on("order-pizza", (size, toppings)=>{
+    console.log(`order recieved baking a ${size} pizza with ${toppings} `);
+})
+
+emitter.on("order-pizza",(size)=>{
+    if(size==="large"){
+        console.log("serve complimentry drink")
+    }
+})//This line registers an event listener for the "order-pizza" event using the on method of the emitter object.
+
+emitter.emit("order-pizza", "large", "mushroom");//These lines emit "order-pizza" events with different parameters.
+emitter.emit("order-pizza", "small", "tommoto");
+
